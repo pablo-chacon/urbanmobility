@@ -1,6 +1,6 @@
 package com.example.maasfp.service;
 
-import com.example.maasfp.model.User;
+import com.example.maasfp.model.Accounts;
 import com.example.maasfp.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,12 +11,12 @@ public class UserService implements IUserService {
     private IUserRepository repository;
 
     @Override
-    public User saveAccount(User newUser) {
-        return repository.save(newUser);
+    public Accounts saveAccount(Accounts newAccounts) {
+        return repository.save(newAccounts);
     }
 
     @Override
-    public User updateAccount(User oldUser) {
+    public Accounts updateAccount(Accounts oldAccounts) {
         return null;
     }
 
@@ -26,7 +26,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User fetchedAccount(Long accountId) {
+    public Accounts fetchedAccount(Long accountId) {
         return null;
     }
 }

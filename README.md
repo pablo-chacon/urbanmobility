@@ -2,5 +2,5 @@
 MaaS project
 
 ubuntu server (local machine)
-user: guest
+accounts: guest
 passwd: test666
