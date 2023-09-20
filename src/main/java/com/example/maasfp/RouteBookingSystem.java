@@ -8,9 +8,7 @@ import java.util.List;
 public class RouteBookingSystem {
     private List<Route> routes;
 
-    /**
-     * Constructor to initialize the vehicle booking system.
-     */
+
     public RouteBookingSystem() {
         this.routes = new ArrayList<>();
     }
