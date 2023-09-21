@@ -1,16 +1,16 @@
 package com.example.maasfp.service;
 
 import com.example.maasfp.model.Route;
-import com.example.maasfp.repository.IRouteRepository;
+import com.example.maasfp.repository.RouteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class RouteService implements IRouteService {
+public class RouteService implements InterfaceRouteService {
     @Autowired
-    IRouteRepository repository;
+    RouteRepository repository;
 
     @Override
     public Route updateRoute(Long accountId) {

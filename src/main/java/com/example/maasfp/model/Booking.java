@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Bookings {
+public class Booking {
     @Id
     private String username;
     private long routeId;
