@@ -49,9 +49,8 @@ public class AccountServiceTests {
     }
 
     /**
-
      * Title: Update Account Test
-     * Description: Ensure succesful account update.
+     * Description: Ensure successful account update.
      */
     @Test
     public void testUpdateAccount() {
@@ -76,9 +75,8 @@ public class AccountServiceTests {
     }
 
     /**
-     * Test to ensure that an account is deleted successfully.
      * Title: Delete Account Test
-     * Description: Validates that an account is deleted successfully.
+     * Description: Ensures successful account removal.
      */
     @Test
     public void testDeleteAccount() {
@@ -90,7 +88,6 @@ public class AccountServiceTests {
     }
 
     /**
-
      * Title: Get Account Test
      * Description: Ensure successful get account.
      */
