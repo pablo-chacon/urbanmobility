@@ -17,7 +17,7 @@ public class AccountController {
                 .username("Josef")
                 .contactInfo("112")
                 .accountType("ADMIN")
-                .paymentInfo(112)
+                .paymentInfo("112")
                 .build();
         return accountService.saveAccount(account);
     }
