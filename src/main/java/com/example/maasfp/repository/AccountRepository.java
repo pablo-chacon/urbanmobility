@@ -1,10 +1,9 @@
 package com.example.maasfp.repository;
 
-
-import com.example.maasfp.model.Booking;
+import com.example.maasfp.model.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BookingsRepository extends JpaRepository<Booking, Long> {
+public interface AccountRepository extends JpaRepository<Account, Long> {
 }

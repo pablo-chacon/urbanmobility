@@ -1,19 +1,19 @@
 package com.example.maasfp.service;
 
 
-import com.example.maasfp.model.Accounts;
+import com.example.maasfp.model.Account;
 
 public interface InterfaceUserService {
 
-    Accounts saveAccount(Accounts newAccounts);
+    Account saveAccount(Account newAccount);
 
 
-    Accounts updateAccount(Accounts oldAccounts);
+    Account updateAccount(Account oldAccount);
 
 
 
     void deleteAccount(Long accountId);
 
 
-    Accounts getAccount(Long accountId);
+    Account getAccount(Long accountId);
 }

@@ -13,7 +13,6 @@ import lombok.*;
 @AllArgsConstructor
 public class Route {
 
-
     private String departurePoint;
     private String arrivalPoint;
     private String typeOfTransport;

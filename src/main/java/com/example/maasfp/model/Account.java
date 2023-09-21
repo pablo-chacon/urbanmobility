@@ -15,13 +15,16 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Accounts {
+public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String username;
     private String contactInfo;
-    private int paymentInfo;
-    //    Tickets you bought but haven't used yet
+    private String paymentInfo;
     private String accountType;
+
+    public Account(String johnDoe, String email) {
+
+    }
 }
