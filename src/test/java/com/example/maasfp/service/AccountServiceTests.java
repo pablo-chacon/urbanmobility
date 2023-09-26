@@ -30,15 +30,15 @@ public class AccountServiceTests {
     @Test
     public void testSaveAccount() {
         // Create a new Account object
-        Account newAccount = new Account("John Doe", "john@example.com");
+        Account newAccount = new Account("Foo Bar", "foo@bar.com");
 
-        // Mock the repository's save method to return the new account
+        // Mock the repository's saved method to return the new account
         when(repository.save(newAccount)).thenReturn(newAccount);
 
         // Call the saveAccount method of the accountService
         Account savedAccount = accountService.saveAccount(newAccount);
 
-        // Verify that the repository's save method was called once with the new account
+        // Verify that the repository's saved method was called once with the new account
         verify(repository, times(1)).save(newAccount);
 
         // Verify that the saved account is not null
@@ -55,7 +55,7 @@ public class AccountServiceTests {
     @Test
     public void testUpdateAccount() {
         // Create an existing Account object
-        Account oldAccount = new Account("John Doe", "john@example.com");
+        Account oldAccount = new Account("Foo Bar", "foo@bar.com");
         oldAccount.setId(1L);
 
         // Mock the repository's save method to return the updated account
@@ -94,7 +94,7 @@ public class AccountServiceTests {
     @Test
     public void testGetAccount() {
         // Create an existing Account object
-        Account existingAccount = new Account("John Doe", "john@example.com");
+        Account existingAccount = new Account("Foo Bar", "foo@bar.com");
         existingAccount.setId(1L);
 
         // Mock the repository's findById method to return the existing account

@@ -1,9 +1,7 @@
 package com.example.maasfp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -24,4 +22,8 @@ public class Route {
     private String transportationCompany;
     private double discountPrice;
 
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name ="account_id",referencedColumnName = "id")
+    private Account account;
 }

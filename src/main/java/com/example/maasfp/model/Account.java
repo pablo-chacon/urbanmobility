@@ -1,16 +1,12 @@
 package com.example.maasfp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.List;
 
 
-@Entity
+/*@Entity
 @Data
 @Builder
 @NoArgsConstructor
@@ -27,4 +23,42 @@ public class Account {
     public Account(String johnDoe, String email) {
 
     }
+}*/
+
+
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@Entity(name = "account")
+public class Account {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String username;
+
+    @Column(nullable = false, updatable = false)
+    private String accountType;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String phone;
+
+    @Column(nullable = false)
+    private int paymentHistory;
+
+    @Column(nullable = false)
+    private String paymentMethod;
+
+    @Column(nullable = false)
+    private boolean isPaymentSet;
+
+    @OneToMany(targetEntity = Route.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    private List<Route> routes;
 }

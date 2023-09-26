@@ -18,12 +18,24 @@ public class RouteService implements InterfaceRouteService {
     }
 
     @Override
-    public List<Route> fetchAllRoutes() {
+    public List<Route> getAllRoutes() {
         return null;
+    }
+
+
+    @Override
+    public Route getRouteById(Long id) {
+        return repository.findById(id).get();
     }
 
     @Override
     public Route createNewRoute(Route newRoute) {
         return null;
+    }
+
+    public Route updateRouteById(Long id) {
+        Route route = repository.findById(id).get();
+        route.setAccount(route.getAccount());
+        return repository.save(route);
     }
 }

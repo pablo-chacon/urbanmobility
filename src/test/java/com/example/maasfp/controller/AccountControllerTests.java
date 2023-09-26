@@ -1,75 +1,142 @@
 package com.example.maasfp.controller;
 
-import com.example.maasfp.controller.AccountController;
 import com.example.maasfp.model.Account;
-import com.example.maasfp.service.AccountService;
+import com.example.maasfp.repository.AccountRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
-public class AccountControllerTests {
+/**
+ * This class performs AccountController end-to-end tests.
+ */
 
-    @Mock
-    private AccountService accountService;
+@SpringBootTest
+@AutoConfigureMockMvc
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+class AccountControllerTest {
 
-    @InjectMocks
-    private AccountController accountController;
+    @Autowired
+    private MockMvc mvc;
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+    private Account account;
+    private String jsonAccount;
 
     @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
+    public void setup() throws JsonProcessingException {
 
-    /**
-     * Title: Save Account Test
-     * Description: Ensures saveAccount method returns saved account.
-     */
-    @Test
-    public void testSaveAccount() {
-        // Create a mock Account object
-        Account account = Account.builder()
-                .username("Josef")
-                .contactInfo("112")
-                .accountType("ADMIN")
-                .paymentInfo("112")
+        // Variable
+        account = Account.builder()
+                .username("Foo")
+                .role("user")
+                .email("foo@bar.com")
+                .phone("+4670666666")
+                .paymentHistory(0)
+                .paymentMethod("Credit Card")
+                .isPaymentSet(true)
                 .build();
 
-        // Create a mock Account object returned by the accountService.saveAccount()
-        Account savedAccount = Account.builder()
-                .id(1L)
-                .username("Josef")
-                .contactInfo("112")
-                .accountType("ADMIN")
-                .paymentInfo("112")
-                .build();
-
-        // Mock the accountService.saveAccount() method to return savedAccount object
-        when(accountService.saveAccount(account)).thenReturn(savedAccount);
-
-        // Call the saveAccount method.
-        Account result = accountController.saveAccount();
-
-        // Verify accountService.saveAccount() called with correct account object
-        verify(accountService, times(1)).saveAccount(account);
-
-        // Verify that the result is equal to the savedAccount object
-        assertEquals(savedAccount, result, "The saveAccount method did not return the correct account object.");
+        ObjectMapper mapper = new ObjectMapper();
+        jsonAccount = mapper.writeValueAsString(account);
     }
 
-    /**
-     * Title: Null Account Test
-     * Description: Ensures exception is thrown if account object is null.
-     */
+    @AfterEach
+    public void cleanUp(){
+        accountRepository.deleteAll();
+    }
+
     @Test
-    public void testSaveAccountNullAccount() {
-        // Call the saveAccount method in the AccountController with a null account object
-        assertThrows(NullPointerException.class, () -> {
-            accountController.saveAccount();
-        }, "Expected an exception when the account object is null.");
+    @DisplayName("post endpoint returns code 201 account.")
+    public void PostEndPointReturnsCreationStatus() throws Exception {
+        mvc.perform(MockMvcRequestBuilders
+                        .post("/api/account")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonAccount)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id", Matchers.is(1)))
+                .andExpect(jsonPath("$.username", Matchers.is("Foo")))
+                .andExpect(jsonPath("$.email", Matchers.is("foo@bar.com")));
+
+    }
+
+    @Test
+    @DisplayName("post endpoint returns code 409, conflict")
+    public void PostEndPointReturnIfConflict() throws Exception {
+        // Arrange
+        accountRepository.save(account);
+
+        // Act
+        mvc.perform(MockMvcRequestBuilders
+                        .post("/api/account")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonAccount)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isConflict());
+    }
+
+    @Test
+    @DisplayName("delete endpoint returns 200, OK")
+    public void DeleteEndpoint_ShouldReturnOkStatusCode_AndStringMessage() throws Exception {
+        // Arrange
+        accountRepository.save(account);
+
+        // Act
+        mvc.perform(MockMvcRequestBuilders
+                        .delete("/api/account/{accountId}", 1L))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Account successfully removed"));
+    }
+
+    @Test
+    @DisplayName("endpoint returns code 409, conflict")
+    public void DeleteEndPoint_ShouldReturnNotFoundStatusCode() throws Exception {
+        mvc.perform(MockMvcRequestBuilders
+                        .delete("/api/account/{accountId}", 1L))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @DisplayName("Update endpoint, /api/account/{accountId}")
+    public void PutEndpoint_ShouldReturnOkStatusCode_AndUpdatedAccount() throws Exception {
+        // Arrange
+        accountRepository.save(account);
+
+        // Act
+        mvc.perform(MockMvcRequestBuilders
+                        .put("/api/account/{accountId}", 1L)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonAccount)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", Matchers.is(1)))
+                .andExpect(jsonPath("$.username", Matchers.is("Foo")))
+                .andExpect(jsonPath("$.email", Matchers.is("foo@bar.com")));
+    }
+
+    @Test
+    @DisplayName("update endpoint /api/account/{accountId}")
+    public void PutEndPoint_ShouldReturnNotFoundStatusCode() throws Exception {
+        mvc.perform(MockMvcRequestBuilders
+                        .put("/api/account/{accountId}", 1L)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(jsonAccount)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
     }
 }

@@ -9,8 +9,10 @@ public interface InterfaceRouteService {
     /*Update eventual discount*/
     Route updateRoute(Long accountId);
 
-    /*Fetch a list of routes from all the contractors*/
-    List<Route> fetchAllRoutes();
+    /*Get all routes*/
+    List<Route> getAllRoutes();
+
+    Route getRouteById(Long id);
 
     /*Create a new route*/
     Route createNewRoute(Route newRoute);
