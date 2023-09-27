@@ -3,8 +3,6 @@ package com.example.maasfp.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-
 
 /*@Entity
 @Data
@@ -33,6 +31,8 @@ public class Account {
 @AllArgsConstructor
 @Entity(name = "account")
 public class Account {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -58,7 +58,5 @@ public class Account {
     @Column(nullable = false)
     private boolean isPaymentSet;
 
-    @OneToMany(targetEntity = Route.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "account_id", referencedColumnName = "id")
-    private List<Route> routes;
+
 }

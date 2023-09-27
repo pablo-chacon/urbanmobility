@@ -1,15 +1,20 @@
 package com.example.maasfp.service;
 
 
-import com.example.maasfp.model.Booking;
+import com.example.maasfp.model.Route;
+
+import java.util.List;
 
 public interface InterfaceBookingService {
-    /*Fetch object*/
-    Booking fetchActiveBookingList(Long accountId);
+    /*Update eventual discount*/
+    Route updateRoute(Long accountId);
 
-    /*Create new booking*/
-    Booking createNewBooking(Booking booking);
+    /*Get all routes*/
+    List<Route> getAllRoutes();
 
-    /*Delete a booking*/
-    void deleteBooking(Long bookingId);
+    Route getRouteById(Long id);
+
+    /*Create a new route*/
+    Route createNewRoute(Route newRoute);
+
 }

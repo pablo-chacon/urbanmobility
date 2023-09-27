@@ -43,7 +43,7 @@ class AccountControllerTest {
         // Variable
         account = Account.builder()
                 .username("Foo")
-                .role("user")
+                .accountType("user")
                 .email("foo@bar.com")
                 .phone("+4670666666")
                 .paymentHistory(0)
@@ -92,10 +92,9 @@ class AccountControllerTest {
 
     @Test
     @DisplayName("delete endpoint returns 200, OK")
-    public void DeleteEndpoint_ShouldReturnOkStatusCode_AndStringMessage() throws Exception {
+    public void DeleteEndpointReturnsOk() throws Exception {
         // Arrange
         accountRepository.save(account);
-
         // Act
         mvc.perform(MockMvcRequestBuilders
                         .delete("/api/account/{accountId}", 1L))
@@ -105,7 +104,7 @@ class AccountControllerTest {
 
     @Test
     @DisplayName("endpoint returns code 409, conflict")
-    public void DeleteEndPoint_ShouldReturnNotFoundStatusCode() throws Exception {
+    public void DeleteEndPointReturnsNotFound() throws Exception {
         mvc.perform(MockMvcRequestBuilders
                         .delete("/api/account/{accountId}", 1L))
                 .andExpect(status().isNotFound());
@@ -113,7 +112,7 @@ class AccountControllerTest {
 
     @Test
     @DisplayName("Update endpoint, /api/account/{accountId}")
-    public void PutEndpoint_ShouldReturnOkStatusCode_AndUpdatedAccount() throws Exception {
+    public void PutEndpointReturnsOkUpdatedAccount() throws Exception {
         // Arrange
         accountRepository.save(account);
 
@@ -131,7 +130,7 @@ class AccountControllerTest {
 
     @Test
     @DisplayName("update endpoint /api/account/{accountId}")
-    public void PutEndPoint_ShouldReturnNotFoundStatusCode() throws Exception {
+    public void PutEndPointReturnsNotFound() throws Exception {
         mvc.perform(MockMvcRequestBuilders
                         .put("/api/account/{accountId}", 1L)
                         .contentType(MediaType.APPLICATION_JSON)

@@ -2,13 +2,13 @@ package com.example.maasfp.service;
 
 import com.example.maasfp.model.Account;
 import com.example.maasfp.repository.AccountRepository;
-import com.example.maasfp.service.AccountService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
 
 public class AccountServiceTests {
 
@@ -30,22 +30,29 @@ public class AccountServiceTests {
     @Test
     public void testSaveAccount() {
         // Create a new Account object
-        Account newAccount = new Account("Foo Bar", "foo@bar.com");
+        Account account = new Account();
+        account.setUsername("FooBar");
+        account.setEmail("foo@bar.com");
+        account.setPhone("+460666666");
+        account.setPaymentHistory(Integer.parseInt("Paid"));
+        account.setAccountType("Provider");
+        account.setPaymentMethod("Credit Card");
 
+        Account newAccount = restTemplate.postForObject("http://localhost:8080/api/accounts", account, Account.class);
         // Mock the repository's saved method to return the new account
-        when(repository.save(newAccount)).thenReturn(newAccount);
+        when(repository.save(account)).thenReturn(account);
 
         // Call the saveAccount method of the accountService
-        Account savedAccount = accountService.saveAccount(newAccount);
+        Account savedAccount = accountService.saveAccount(account);
 
         // Verify that the repository's saved method was called once with the new account
-        verify(repository, times(1)).save(newAccount);
+        verify(repository, times(1)).save(account);
 
         // Verify that the saved account is not null
         assertNotNull(savedAccount);
 
         // Verify that the saved account is the same as the new account
-        assertEquals(newAccount, savedAccount);
+        assertEquals(account, savedAccount);
     }
 
     /**

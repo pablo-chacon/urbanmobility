@@ -11,55 +11,62 @@ import java.util.Optional;
 
 @Service
 public class AccountService implements InterfaceUserService {
-    private final AccountRepository accountRepository;
+    private final AccountRepository repository;
 
-    public AccountService(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
+    public AccountService(AccountRepository repository) {
+        this.repository = repository;
     }
 
     public Optional<Account> getAccountById(long accountId) {
-        if (!accountRepository.existsById(accountId)){
+        if (!repository.existsById(accountId)){
             throw new ResourceNotFoundException("Account with ID" + " " + accountId + " " + "does not exist");
         }
-        return accountRepository.findById(accountId);
+        return repository.findById(accountId);
     }
 
     public List<Account> getAllAccounts() {
-        if(accountRepository.findAll().isEmpty()){
+        if(repository.findAll().isEmpty()){
             throw new ResourceNotFoundException("No account found");
         }
-        return accountRepository.findAll();
+        return repository.findAll();
+    }
+
+    public Account findByAccountType(String accountType) {
+        if(repository.findByAccountType(accountType) == null){
+            throw new ResourceNotFoundException("No account found");
+        }
+        return repository.findByAccountType(accountType);
     }
 
     public Account createAccount(Account account) {
         // Check if username already exist
         String username = account.getUsername();
-        if (accountRepository.findByUsername(username) != null) {
+        if (repository.findByUsername(username) != null) {
             throw new InvalidInputException(username + "is already in use");
         }
 
         // Check if email already exist
         String email = account.getEmail();
-        if (accountRepository.findByEmail(email) != null) {
+        if (repository.findByEmail(email) != null) {
             throw new InvalidInputException(email + "is already in use.");
         }
         // Save account to DB.
-        return accountRepository.save(account);
+        return repository.save(account);
     }
 
     public void deleteAccountById(long accountId) {
-        if(!accountRepository.existsById(accountId)){
+        if(!repository.existsById(accountId)){
             throw new ResourceNotFoundException("No account with " + accountId + " found");
         }
-        accountRepository.deleteById(accountId);
+        repository.deleteById(accountId);
     }
 
     public Account updateAccountById(Long accountId, Account account) {
-        if (!accountRepository.existsById(accountId)){
+        if (!repository.existsById(accountId)){
             throw new ResourceNotFoundException("No account with " + accountId + " found");
         }
         account.setId(accountId);
-        return accountRepository.save(account);
+        return repository.save(account);
     }
 
     @Override

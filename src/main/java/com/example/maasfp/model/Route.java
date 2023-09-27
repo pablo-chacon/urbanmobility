@@ -3,6 +3,8 @@ package com.example.maasfp.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 @Entity
 @Data
@@ -10,20 +12,14 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Route {
-
-    private String departurePoint;
-    private String arrivalPoint;
-    private String typeOfTransport;
-    private String estimatedDeparture;
-    private String estimatedArrival;
-    private int ticketPrice;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String transportationCompany;
-    private double discountPrice;
+    @Column(name = "id", nullable = false)
+    @JdbcTypeCode(SqlTypes.JAVA_OBJECT)
+    private Long id;
 
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name ="account_id",referencedColumnName = "id")
-    private Account account;
+    private String departure;
+    private String arrival;
+    private String transportation;
+
 }

@@ -1,5 +1,6 @@
 package com.example.maasfp.exceptions;
 
+
 public class InvalidInputException extends RuntimeException {
 
     public InvalidInputException(String message) {
@@ -9,4 +10,5 @@ public class InvalidInputException extends RuntimeException {
     public InvalidInputException(Throwable cause) {
         super(cause);
     }
+
 }

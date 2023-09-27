@@ -7,12 +7,13 @@ import java.util.Date;
 
 
 public class JwtUtils {
+
     private final String SECRET_KEY = "your-secret-key";
     private final long EXPIRATION_TIME = 86400000; // 24 hours
 
     /**
      * @param accountType provider, admin, user.
-     * @param userId      user ID.
+     * @param userId user ID.
      * @return JWT token.
      */
     public String generateToken(String accountType, String userId) {
