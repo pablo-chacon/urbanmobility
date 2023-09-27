@@ -38,7 +38,7 @@ public class AccountServiceTests {
         account.setAccountType("Provider");
         account.setPaymentMethod("Credit Card");
 
-        Account newAccount = restTemplate.postForObject("http://localhost:8080/api/accounts", account, Account.class);
+        //Account newAccount = restTemplate.postForObject("http://localhost:8080/api/accounts", account, Account.class);
         // Mock the repository's saved method to return the new account
         when(repository.save(account)).thenReturn(account);
 
@@ -62,22 +62,22 @@ public class AccountServiceTests {
     @Test
     public void testUpdateAccount() {
         // Create an existing Account object
-        Account oldAccount = new Account("Foo Bar", "foo@bar.com");
+        Account oldAccount = new Account();
         oldAccount.setId(1L);
 
-        // Mock the repository's save method to return the updated account
+        // Mock repo save method to returns updated account
         when(repository.save(oldAccount)).thenReturn(oldAccount);
 
-        // Call the updateAccount method of the accountService
+        // Call accountService.updateAccount method.
         Account updatedAccount = accountService.updateAccount(oldAccount);
 
-        // Verify that the repository's save method was called once with the updated account
+        // Verify repo save method called with updated account
         verify(repository, times(1)).save(oldAccount);
 
-        // Verify that the updated account is not null
+        // Verify updated account is not null
         assertNotNull(updatedAccount);
 
-        // Verify that the updated account is the same as the old account
+        // Verify updated account is same old account
         assertEquals(oldAccount, updatedAccount);
     }
 
@@ -101,7 +101,7 @@ public class AccountServiceTests {
     @Test
     public void testGetAccount() {
         // Create an existing Account object
-        Account existingAccount = new Account("Foo Bar", "foo@bar.com");
+        Account existingAccount = new Account();
         existingAccount.setId(1L);
 
         // Mock the repository's findById method to return the existing account

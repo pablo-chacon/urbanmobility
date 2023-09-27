@@ -14,85 +14,81 @@ public class AccountUnitTests {
         // Create an Accounts object with the provided values.
         Account account = Account.builder()
                 .id(1L)
-                .username("john_doe")
-                .contactInfo("john.doe@example.com")
-                .paymentInfo("1234-5678-9012-3456")
-                .accountType("premium")
+                .username("foobar")
+                .email("foo@bar.com")
+                .paymentMethod("Credit card")
+                .accountType("provider")
                 .build();
 
         // Verify that the Accounts object is constructed correctly.
-        assertEquals(1L, account.getId(), "The ID was not set correctly.");
-        assertEquals("john_doe", account.getUsername(), "The username was not set correctly.");
-        assertEquals("john.doe@example.com", account.getContactInfo(), "The contact info was not set correctly.");
-        assertEquals("1234-5678-9012-3456", account.getPaymentInfo(), "The payment info was not set correctly.");
-        assertEquals("premium", account.getAccountType(), "The account type was not set correctly.");
+        assertEquals(1L, account.getId(), "ID not set correctly.");
+        assertEquals("foobar", account.getUsername(), "Username not set correctly.");
+        assertEquals("foo@bar.com", account.getEmail(), "Email not set correctly.");
+        assertEquals("Credit Card", account.getPaymentMethod(), "Payment method not set correctly.");
+        assertEquals("premium", account.getAccountType(), "Account type not set correctly.");
     }
 
     /**
      * Test to ensure that the Accounts object throws an exception when the username is null.
      * Title: Null Username Test
-     * Description: Exception is thrown when the username is null.
-     * @throws Exception if any error occurs during the validation.
+     * Description: Exception is thrown if username is null.
+     * @throws Exception if error occurs during validation.
      */
     @Test
     public void testNullUsernameException() throws Exception {
-        // Attempt to create an Accounts object with a null username.
-        // This should throw an IllegalArgumentException.
+        // Attempt creation of Account with null username.
         assertThrows(IllegalArgumentException.class, () -> {
             Account.builder()
                     .id(1L)
                     .username(null)
-                    .contactInfo("john.doe@example.com")
-                    .paymentInfo("1234-5678-9012-3456")
-                    .accountType("premium")
+                    .email("foo@bar.com")
+                    .paymentMethod("Credit Card")
+                    .accountType("User")
                     .build();
-        }, "Expected an exception due to a null username.");
+        }, "Expected null username exception.");
     }
 
     /**
-     * Test to ensure that the Accounts object throws an exception when the account type is empty.
-     * @throws Exception if any error occurs during the validation.
+     * Test Accounts object throws exception if account type is empty.
+     * @throws Exception if error occurs during the validation.
      */
     @Test
     public void testEmptyAccountTypeException() throws Exception {
-        // Attempt to create an Accounts object with an empty account type.
-        // This should throw an IllegalArgumentException.
+        // Attempt creation of empty account type.
         assertThrows(IllegalArgumentException.class, () -> {
             Account.builder()
                     .id(1L)
-                    .username("john_doe")
-                    .contactInfo("john.doe@example.com")
-                    .paymentInfo("1234-5678-9012-3456")
+                    .username("foobar")
+                    .email("foo@bar.com")
+                    .paymentMethod("Credit Card")
                     .accountType("")
                     .build();
-        }, "Expected an exception due to an empty account type.");
+        }, "Expected empty account type exception.");
     }
 
     /**
      * Test ensures the Accounts object equal another Accounts object.
-
      * @throws Exception Validation error.
      */
     @Test
     public void testAccountsEquality() throws Exception {
-        // Create two Accounts objects with the same values.
+        // Create two identical Accounts.
         Account account1 = Account.builder()
                 .id(1L)
-                .username("john_doe")
-                .contactInfo("john.doe@example.com")
-                .paymentInfo("1234-5678-9012-3456")
-                .accountType("premium")
+                .username("foo")
+                .email("foo@bar.com")
+                .paymentMethod("Credit Card")
+                .accountType("ADMIN")
                 .build();
 
         Account account2 = Account.builder()
                 .id(1L)
-                .username("john_doe")
-                .contactInfo("john.doe@example.com")
-                .paymentInfo("1234-5678-9012-3456")
-                .accountType("premium")
+                .username("foo")
+                .email("foo@bar.com")
+                .paymentMethod("Credit Card")
+                .accountType("ADMIN")
                 .build();
-
         // Verify that the two Accounts objects are equal.
-        assertEquals(account1, account2, "The two Accounts objects are not equal.");
+        assertEquals(account1, account2, "Not identical accounts.");
     }
 }

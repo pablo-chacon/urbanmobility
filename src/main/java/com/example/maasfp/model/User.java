@@ -9,7 +9,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @Entity(name = "account")
-public class Provider {
+public class User {
 
 
     @Id

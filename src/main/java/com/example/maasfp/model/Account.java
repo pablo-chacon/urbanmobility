@@ -4,26 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 
-/*@Entity
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class Account {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String username;
-    private String contactInfo;
-    private String paymentInfo;
-    private String accountType;
-
-    public Account(String johnDoe, String email) {
-
-    }
-}*/
-
-
 @NoArgsConstructor
 @Getter
 @Setter
@@ -60,3 +40,12 @@ public class Account {
 
 
 }
+
+/*
+import jakarta.persistence.*;
+import lombok.*;
+public enum Account {
+    ADMIN, USER, SUPPLIER
+}
+
+ */

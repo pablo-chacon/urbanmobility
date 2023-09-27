@@ -28,7 +28,7 @@ public class BookingController {
     }
 
 
-    @GetMapping
+    /*@GetMapping
     public List<Booking> getAllRoute(){
         return bookingService.getAllRoutes();
     }
@@ -50,6 +50,6 @@ public class BookingController {
     public Route updateRoute () {
         Optional<Account> account = accountService.getAccountById(id);
         return bookingService.updateRouteById(account.get().getId());
-    }
+    }*/
 
 }

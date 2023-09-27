@@ -1,7 +1,9 @@
 package com.example.maasfp.model;
 
+
 import jakarta.persistence.*;
 import lombok.*;
+
 
 @NoArgsConstructor
 @Getter
@@ -9,7 +11,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @Entity(name = "account")
-public class Provider {
+public class Admin {
 
 
     @Id

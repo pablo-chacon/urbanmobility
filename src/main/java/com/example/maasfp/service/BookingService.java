@@ -32,10 +32,10 @@ public class BookingService implements InterfaceBookingService {
     public Route createNewRoute(Route newRoute) {
         return null;
     }
-
+/*
     public Route updateRouteById(Long id) {
         Route route = repository.findById(id).get();
         route.setAccount(route.getAccount());
         return repository.save(route);
-    }
+    }*/
 }
