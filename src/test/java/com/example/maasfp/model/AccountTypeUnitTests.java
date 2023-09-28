@@ -72,7 +72,7 @@ public class AccountTypeUnitTests {
      */
     @Test
     public void testAccountsEquality() throws Exception {
-        // Create two identical Accounts.
+        // Create two equal value Accounts.
         Account account1 = Account.builder()
                 .id(1L)
                 .username("foo")
@@ -89,6 +89,6 @@ public class AccountTypeUnitTests {
                 .accountType("ADMIN")
                 .build();
         // Verify that the two Accounts objects are equal.
-        assertEquals(account1, account2, "Not identical accounts.");
+        assertEquals(account1, account2, "Not equal accounts.");
     }
 }

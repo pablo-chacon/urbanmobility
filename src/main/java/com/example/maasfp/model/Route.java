@@ -18,8 +18,16 @@ public class Route {
     @JdbcTypeCode(SqlTypes.JAVA_OBJECT)
     private Long id;
 
+    private String origin;
+    private String destination;
     private String departure;
     private String arrival;
     private String transportationType;
+    private int price;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String provider;
+    private double campaignCode;
 
 }
