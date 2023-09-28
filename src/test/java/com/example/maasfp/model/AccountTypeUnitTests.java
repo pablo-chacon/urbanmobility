@@ -3,7 +3,7 @@ package com.example.maasfp.model;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AccountUnitTests {
+public class AccountTypeUnitTests {
 
     /**
      * Test construction of Accounts object.

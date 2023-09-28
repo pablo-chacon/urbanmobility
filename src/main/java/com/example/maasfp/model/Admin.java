@@ -1,4 +1,4 @@
-package com.example.maasfp.model;
+/*package com.example.maasfp.model;
 
 
 import jakarta.persistence.*;
@@ -41,3 +41,5 @@ public class Admin {
 
 
 }
+
+ */

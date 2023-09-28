@@ -1,49 +1,20 @@
-/*package com.example.maasfp.model;
+package com.example.maasfp.model;
 
-import jakarta.persistence.*;
-import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@NoArgsConstructor
-@Getter
-@Setter
-@Builder
-@AllArgsConstructor
-@Entity(name = "account")
-public class User extends Account {
+public class AccountDetails {
 
+    /**
+     * Mock data for AccountDetails
+     *
+     * @return List<Account>
+     */
+    public static List<Account> AccountDetails() {
+        List<Account> mockData = new ArrayList<>();
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false, unique = true)
-    private String username;
-
-    @Column(nullable = false, updatable = false)
-    private String accountType;
-
-    @Column(nullable = false, unique = true)
-    private String email;
-
-    @Column(nullable = false)
-    private String phone;
-
-    @Column(nullable = false)
-    private int paymentHistory;
-
-    @Column(nullable = false)
-    private String paymentMethod;
-
-    @Column(nullable = false)
-    private boolean isPaymentSet;
-
-    public static List<User> generateMockData() {
-        List<User> mockData = new ArrayList<>();
-
-        mockData.add(User.builder()
+        mockData.add(Account.builder()
                 .id(1L)
                 .username("foo.bar")
                 .accountType("USER")
@@ -54,7 +25,7 @@ public class User extends Account {
                 .isPaymentSet(true)
                 .build());
 
-        mockData.add(User.builder()
+        mockData.add(Account.builder()
                 .id(1L)
                 .username("torsten.flink")
                 .accountType("USER")
@@ -65,7 +36,7 @@ public class User extends Account {
                 .isPaymentSet(true)
                 .build());
 
-        mockData.add(Provider.builder()
+        mockData.add(Account.builder()
                 .id(2L)
                 .username("sl")
                 .accountType("PROVIDER")
@@ -76,7 +47,7 @@ public class User extends Account {
                 .isPaymentSet(true)
                 .build());
 
-        mockData.add(Provider.builder()
+        mockData.add(Account.builder()
                 .id(3L)
                 .username("sj")
                 .accountType("PROVIDER")
@@ -87,7 +58,7 @@ public class User extends Account {
                 .isPaymentSet(false)
                 .build());
 
-        mockData.add(Provider.builder()
+        mockData.add(Account.builder()
                 .id(1L)
                 .username("superuser")
                 .accountType("ADMIN")
@@ -98,7 +69,7 @@ public class User extends Account {
                 .isPaymentSet(true)
                 .build());
 
-        mockData.add(User.builder()
+        mockData.add(Account.builder()
                 .id(2L)
                 .username("bar.foo")
                 .accountType("USER")
@@ -109,7 +80,7 @@ public class User extends Account {
                 .isPaymentSet(true)
                 .build());
 
-        mockData.add(User.builder()
+        mockData.add(Account.builder()
                 .id(3L)
                 .username("torsten.bengtsson")
                 .accountType("USER")
@@ -124,6 +95,5 @@ public class User extends Account {
         return mockData;
     }
 
-}
 
- */
+}

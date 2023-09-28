@@ -1,4 +1,4 @@
-package com.example.maasfp.model;
+/*package com.example.maasfp.model;
 
 
 import jakarta.persistence.Entity;
@@ -19,3 +19,5 @@ public class PaymentHistory {
     private String username;
     private long routeId;
 }
+
+ */

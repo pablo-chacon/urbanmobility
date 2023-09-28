@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 
-public class AccountServiceTests {
+public class AccountTypeServiceTests {
 
     @Mock
     private AccountRepository repository;

@@ -20,6 +20,6 @@ public class Route {
 
     private String departure;
     private String arrival;
-    private String transportation;
+    private String transportationType;
 
 }

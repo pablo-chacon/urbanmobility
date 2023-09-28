@@ -3,6 +3,9 @@ package com.example.maasfp.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @NoArgsConstructor
 @Getter
@@ -39,13 +42,16 @@ public class Account {
     private boolean isPaymentSet;
 
 
+    public enum AccountType {
+        ADMIN, USER, SUPPLIER
+    }
+
+
 }
 
 /*
 import jakarta.persistence.*;
 import lombok.*;
-public enum Account {
-    ADMIN, USER, SUPPLIER
-}
+
 
  */
