@@ -6,6 +6,7 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 
 import java.util.ArrayList;
+import java.util.IllegalFormatException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +19,7 @@ public class AccountTypeUnitTests {
     List<Account> spyData = new ArrayList<>();
 
     @Test
-    public  List<Account> TestAccounts() {
+    public  List<Account> MockAccounts() {
 
 
         mockData.add(Account.builder()
@@ -34,9 +35,9 @@ public class AccountTypeUnitTests {
 
         Mockito.verify(mockData).add(Account.builder()
                 .id(1L)
-                .username("foo.bar")
+                .username("bar.foo")
                 .accountType("USER")
-                .email("foobar@email.com")
+                .email("barfoo@email.com")
                 .phone("1234567890")
                 .paymentHistory(5)
                 .paymentMethod("Credit Card")
@@ -59,17 +60,17 @@ public class AccountTypeUnitTests {
                 .accountType("PROVIDER")
                 .email("torsten@flink.com")
                 .phone("1234567890")
-                .paymentHistory(5)
-                .paymentMethod("Credit Card")
-                .isPaymentSet(true)
                 .build());
 
-        Mockito.verify(mockData).add(Account.builder()
+        Mockito.verify(spyData).add(Account.builder()
                 .id(1L)
+                .username("torsten.flink")
                 .accountType("PROVIDER")
+                .email("torsten@flink.com")
+                .phone("1234567890")
                 .build());
 
-        assertEquals("PROVIDER", mockData.get(1).getAccountType(), "Account type not set correctly.");
+        assertEquals("PROVIDER", spyData.get(1).getAccountType(), "Account type not set correctly.");
 
 
         mockData.add(Account.builder()
@@ -82,6 +83,19 @@ public class AccountTypeUnitTests {
                 .paymentMethod("post-giro")
                 .isPaymentSet(true)
                 .build());
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Mockito.verify(mockData).add(Account.builder()
+                    .id(2L)
+                    .username(null)
+                    .accountType("PROVIDER")
+                    .email("provider@sl.se")
+                    .phone("9876543210")
+                    .paymentHistory(10)
+                    .paymentMethod("post-giro")
+                    .isPaymentSet(true)
+                    .build());
+        }, "Expected null username exception.");
 
         Mockito.verify(mockData).add(Account.builder()
                 .id(2L)
@@ -181,10 +195,10 @@ public class AccountTypeUnitTests {
      * @throws Exception if error occurs during validation.
      */
     @Test
-    public void testNullUsernameException() throws Exception {
+    public void spyTestNullUsernameException() throws Exception {
         // Attempt creation of Account with null username.
         assertThrows(IllegalArgumentException.class, () -> {
-            Mockito.verify(mockData).add(Account.builder()
+            Mockito.verify(spyData).add(Account.builder()
                     .id(1L)
                     .username(null)
                     .build());
@@ -196,16 +210,19 @@ public class AccountTypeUnitTests {
      * @throws Exception if error occurs during the validation.
      */
     @Test
-    public void testEmptyAccountTypeException() throws Exception {
+    public void MockTestEmptyAccountTypeException() throws Exception {
         // Attempt creation of empty account type.
         assertThrows(IllegalArgumentException.class, () -> {
-            Account.builder()
+            Mockito.verify(mockData).add(Account.builder()
                     .id(1L)
                     .username("foobar")
+                    .accountType("USER")
                     .email("foo@bar.com")
+                    .phone("1234567890")
+                    .paymentHistory(5)
                     .paymentMethod("Credit Card")
-                    .accountType("")
-                    .build();
+                    .isPaymentSet(true)
+                    .build());
         }, "Expected empty account type exception.");
     }
 

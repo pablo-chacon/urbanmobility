@@ -1,6 +1,7 @@
 package com.example.maasfp.controller;
 
 import com.example.maasfp.model.Account;
+import com.example.maasfp.repository.AccountRepository;
 import com.example.maasfp.service.AccountService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,13 +31,19 @@ public class AccountController {
 
 
 @RestController
-@RequestMapping("/api/account")
+@RequestMapping("/api/accounts")
 public class AccountController {
 
     private final AccountService accountService;
 
     public AccountController(AccountService accountService) {
+
         this.accountService = accountService;
+    }
+
+    @GetMapping("/")
+    public List<Account> getAllAccounts() {
+        return accountService.getAllAccounts();
     }
 
     @GetMapping("/{accountId}")
@@ -44,13 +51,9 @@ public class AccountController {
         return Optional.ofNullable(accountService.getAccountById(accountId));
     }
 
-    @GetMapping("all-accounts")
-    public List<Account> getAllAccounts() {
-        return accountService.getAllAccounts();
-    }
-
     @PostMapping
     public ResponseEntity<Account> createAccount(@RequestBody Account account) {
+
         accountService.createAccount(account);
         return new ResponseEntity<>(account, HttpStatus.CREATED);
     }
