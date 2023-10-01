@@ -1,7 +1,5 @@
 package com.example.maasfp.service;
 
-import com.example.maasfp.model.Account;
-
 import com.example.maasfp.model.Booking;
 import com.example.maasfp.repository.ActiveBookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,19 +11,19 @@ public class ActiveBookingService {
     @Autowired
     private ActiveBookingRepository repository;
 
-    public Booking saveBookings(Booking booking) {
+    public Booking newBooking(Booking booking) {
         return repository.save(booking);
     }
 
-    public Booking updateBooking(Account oldAccount) {
-        return null;
+    public Booking updateBooking(Booking booking) {
+        return booking;
     }
 
     public void deleteBooking(Long bookingId) {
 
     }
 
-    public Booking getAccount(Long bookingId) {
+    public Booking getBooking(Long bookingId) {
         return null;
     }
 }

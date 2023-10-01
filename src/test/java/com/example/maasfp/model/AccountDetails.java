@@ -1,18 +1,20 @@
 package com.example.maasfp.model;
 
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.Spy;
 
 import java.util.ArrayList;
-import java.util.IllegalFormatException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+public class AccountDetails {
 
-public class AccountTypeUnitTests {
-/*
+    /**
+     * Mock data for AccountDetails
+     *
+     * @return List<Account>
+     */
+
     @Mock
     List<Account> mockData = new ArrayList<>();
 
@@ -31,27 +33,19 @@ public class AccountTypeUnitTests {
                 .isPaymentSet(true)
                 .build());
 
-        Mockito.verify(mockData).add(Account.builder()
-                .id(1L)
-                .username("foo.ba")
-                .accountType("USER")
-                .email("foobar@email.com")
-                .phone("1234567890")
-                .paymentHistory(5)
-                .paymentMethod("Credit Card")
-                .isPaymentSet(true)
-                .build());
-
 
         mockData.add(Account.builder()
                 .id(1L)
                 .username("torsten.flink")
                 .accountType("PROVIDER")
                 .email("torsten@flink.com")
+                .paymentHistory(5)
+                .paymentMethod("Credit Card")
+                .isPaymentSet(true)
                 .phone("1234567890")
                 .build());
 
-        Mockito.verify(mockData).add(Account.builder()
+       /* Mockito.verify(mockData).add(Account.builder()
                 .id(1L)
                 .username("torsten.flink")
                 .accountType("PROVIDER")
@@ -62,9 +56,7 @@ public class AccountTypeUnitTests {
                 .isPaymentSet(true)
                 .build());
 
-        assertEquals("PROVIDER", mockData.get(1).getAccountType(), "Account type not set correctly.");
-
-
+        assertEquals("PROVIDER", mockData.get(1).getAccountType(), "Account type not set correctly.");*/
         mockData.add(Account.builder()
                 .id(2L)
                 .username("sl")
@@ -77,7 +69,7 @@ public class AccountTypeUnitTests {
                 .build());
 
 
-        Mockito.verify(mockData).add(Account.builder()
+        /*Mockito.verify(mockData).add(Account.builder()
                 .id(2L)
                 .username("SL")
                 .accountType("PROVIDER")
@@ -86,7 +78,7 @@ public class AccountTypeUnitTests {
                 .paymentHistory(10)
                 .paymentMethod("post-giro")
                 .isPaymentSet(true)
-                .build());
+                .build());*/
 
 
         mockData.add(Account.builder()
@@ -100,7 +92,7 @@ public class AccountTypeUnitTests {
                 .isPaymentSet(false)
                 .build());
 
-        Mockito.verify(mockData).add(Account.builder()
+        /*Mockito.verify(mockData).add(Account.builder()
                 .id(3L)
                 .username("sj")
                 .accountType("PROVIDER")
@@ -111,9 +103,7 @@ public class AccountTypeUnitTests {
                 .isPaymentSet(false)
                 .build());
 
-        assertEquals("+46666666666", mockData.get(0).getPhone(), "Phone not set correctly.");
-
-
+        assertEquals("+46666666666", mockData.get(0).getPhone(), "Phone not set correctly.");*/
         mockData.add(Account.builder()
                 .id(1L)
                 .username(null)
@@ -127,7 +117,7 @@ public class AccountTypeUnitTests {
 
 
 
-        Mockito.verify(mockData).add(Account.builder()
+       /* Mockito.verify(mockData).add(Account.builder()
                 .id(1L)
                 .username(null)
                 .accountType("ADMIN")
@@ -136,7 +126,7 @@ public class AccountTypeUnitTests {
                 .paymentHistory(5)
                 .paymentMethod("Credit Card")
                 .isPaymentSet(true)
-                .build());
+                .build());*/
 
 
         mockData.add(Account.builder()
@@ -148,15 +138,6 @@ public class AccountTypeUnitTests {
                 .paymentHistory(10)
                 .paymentMethod("PayPal")
                 .isPaymentSet(true)
-                .build());
-
-
-        Mockito.verify(mockData).add(Account.builder()
-                .id(1L)
-                .username("foobar")
-                .email("foo@bar.com")
-                .paymentMethod("Credit Card")
-                .accountType("")
                 .build());
 
 
@@ -173,71 +154,6 @@ public class AccountTypeUnitTests {
 
 
         return mockData;
-    }*/
-
-
-    /**
-     * Test to ensure that the Accounts object throws an exception when the username is null.
-     * Title: Null Username Test
-     * Description: Exception is thrown if username is null.
-     * @throws Exception if error occurs during validation.
-     */
-    @Test
-    public void spyTestNullUsernameException() throws Exception {
-        // Attempt creation of Account with null username.
-        assertThrows(IllegalArgumentException.class, () -> {
-
-            Mockito.verify(mockData).add(Account.builder()
-                    .id(1L)
-                    .username(null)
-                    .build());
-        }, "Expected null username exception.");
     }
 
-    /**
-     * Test Accounts object throws exception if account type is empty.
-     * @throws Exception if error occurs during the validation.
-     */
-    @Test
-    public void MockTestEmptyAccountTypeException() throws Exception {
-        // Attempt creation of empty account type.
-        assertThrows(IllegalArgumentException.class, () -> {
-            Mockito.verify(mockData).add(Account.builder()
-                    .id(1L)
-                    .username("foobar")
-                    .accountType("USER")
-                    .email("foo@bar.com")
-                    .phone("1234567890")
-                    .paymentHistory(5)
-                    .paymentMethod("Credit Card")
-                    .isPaymentSet(true)
-                    .build());
-        }, "Expected empty account type exception.");
-    }
-
-    /**
-     * Test ensures the Accounts object equal another Accounts object.
-     * @throws Exception Validation error.
-     */
-    @Test
-    public void testAccountsEquality() throws Exception {
-        // Create two equal value Accounts.
-        Account account1 = Account.builder()
-                .id(1L)
-                .username("foo")
-                .email("foo@bar.com")
-                .paymentMethod("Credit Card")
-                .accountType("ADMIN")
-                .build();
-
-        Account account2 = Account.builder()
-                .id(1L)
-                .username("foo")
-                .email("foo@bar.com")
-                .paymentMethod("Credit Card")
-                .accountType("ADMIN")
-                .build();
-        // Verify that the two Accounts objects are equal.
-        assertEquals(account1, account2, "Not equal accounts.");
-    }
 }

@@ -7,27 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-/*
-@RestController
-public class AccountController {
-    @Autowired
-    private AccountService accountService;
-    // Save operation
-    @PostMapping("/create_account")
-    public Account saveAccount() {
-        Account account = Account.builder()
-                .username("Josef")
-                .contactInfo("112")
-                .accountType("ADMIN")
-                .paymentInfo("112")
-                .build();
-        return accountService.saveAccount(account);
-    }
-}*/
-
 
 
 @RestController
@@ -36,10 +18,13 @@ public class AccountController {
 
     private final AccountService accountService;
 
-    public AccountController(AccountService accountService) {
 
+    public AccountController(AccountService accountService) {
         this.accountService = accountService;
+
     }
+
+
 
     @GetMapping("/")
     public List<Account> getAllAccounts() {

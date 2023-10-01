@@ -1,6 +1,7 @@
 package com.example.maasfp.service;
 
 
+import com.example.maasfp.model.Booking;
 import com.example.maasfp.model.Route;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public interface InterfaceBookingService {
     Route updateRoute(Long accountId);
 
     /*Get all routes*/
-    List<Route> getAllRoutes();
+    List<Booking> getAllRoutes();
 
     Route getRouteById(Long id);
 

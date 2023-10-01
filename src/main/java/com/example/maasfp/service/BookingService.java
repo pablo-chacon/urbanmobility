@@ -1,24 +1,26 @@
 package com.example.maasfp.service;
 
+import com.example.maasfp.model.Booking;
 import com.example.maasfp.model.Route;
-import com.example.maasfp.repository.BookingRepository;
+import com.example.maasfp.repository.RouteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class BookingService implements InterfaceBookingService {
     @Autowired
-    BookingRepository repository;
+    RouteRepository repository;
 
     @Override
-    public Route updateRoute(Long accountId) {
-        return null;
+    public Route updateRoute(Long routeId) {
+        return repository.findById(routeId).get();
     }
 
     @Override
-    public List<Route> getAllRoutes() {
+    public List<Booking> getAllRoutes() {
         return null;
     }
 
@@ -35,7 +37,7 @@ public class BookingService implements InterfaceBookingService {
 /*
     public Route updateRouteById(Long id) {
         Route route = repository.findById(id).get();
-        route.setAccount(route.getAccount());
+        route.setRoute(route.getRoute());
         return repository.save(route);
     }*/
 }
