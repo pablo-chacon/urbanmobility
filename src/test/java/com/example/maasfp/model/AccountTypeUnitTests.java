@@ -3,16 +3,14 @@ package com.example.maasfp.model;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.Spy;
 
 import java.util.ArrayList;
-import java.util.IllegalFormatException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AccountTypeUnitTests {
-/*
+
     @Mock
     List<Account> mockData = new ArrayList<>();
 
@@ -173,7 +171,7 @@ public class AccountTypeUnitTests {
 
 
         return mockData;
-    }*/
+    }
 
 
     /**
@@ -183,7 +181,7 @@ public class AccountTypeUnitTests {
      * @throws Exception if error occurs during validation.
      */
     @Test
-    public void spyTestNullUsernameException() throws Exception {
+    public void testNullUsernameException() throws Exception {
         // Attempt creation of Account with null username.
         assertThrows(IllegalArgumentException.class, () -> {
 
@@ -205,7 +203,7 @@ public class AccountTypeUnitTests {
             Mockito.verify(mockData).add(Account.builder()
                     .id(1L)
                     .username("foobar")
-                    .accountType("USER")
+                    .accountType("")
                     .email("foo@bar.com")
                     .phone("1234567890")
                     .paymentHistory(5)
@@ -225,19 +223,23 @@ public class AccountTypeUnitTests {
         Account account1 = Account.builder()
                 .id(1L)
                 .username("foo")
-                .email("foo@bar.com")
-                .paymentMethod("Credit Card")
                 .accountType("ADMIN")
+                .email("foo@bar.com")
+                .phone("1234567890")
+                .paymentHistory(5)
+                .paymentMethod("Credit Card")
                 .build();
 
         Account account2 = Account.builder()
                 .id(1L)
                 .username("foo")
-                .email("foo@bar.com")
-                .paymentMethod("Credit Card")
                 .accountType("ADMIN")
+                .email("foo@bar.com")
+                .phone("1234567890")
+                .paymentHistory(5)
+                .paymentMethod("Credit Card")
                 .build();
-        // Verify that the two Accounts objects are equal.
+        // Verify non equal values.
         assertEquals(account1, account2, "Not equal accounts.");
     }
 }
