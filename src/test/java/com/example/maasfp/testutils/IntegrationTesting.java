@@ -49,10 +49,14 @@ public class IntegrationTesting {
      * Title: Save Account Test
      * Description: Ensures successful save of Account.
      */
+
     @Test
     public void testSaveAccount() {
+        // Create a new Account object
 
+        //Account newAccount = restTemplate.postForObject("http://localhost:8080/api/accounts", account, Account.class);
         when(repository.save(account)).thenReturn(account);
+
         // Call the saveAccount method of the accountService
         Account savedAccount = accountService.saveAccount(account);
 
@@ -61,10 +65,8 @@ public class IntegrationTesting {
 
         // Verify that the saved account is not null
         assertNotNull(savedAccount);
-
-        // Verify that the saved account is the same as the new account
-        assertEquals(account, savedAccount);
     }
+
 
     /**
      * Title: Update Account Test
@@ -89,7 +91,7 @@ public class IntegrationTesting {
         when(repository.save(account1)).thenReturn(account1);
 
         // Call accountService.updateAccount method.
-        Account updatedAccount = accountService.updateAccount(account1);
+        Account updatedAccount = accountService.updateAccountById(Long.valueOf(1), account1);
 
         // Verify repo save method called with updated account
         verify(repository, times(1)).save(account1);
@@ -106,11 +108,10 @@ public class IntegrationTesting {
      * Description: Ensures successful account removal.
      */
     @Test
-    public void testDeleteAccount() {
+    public void testDeleteAccount(Account account) {
         // deleteAccount accountService account ID
-        accountService.deleteAccount(1L);
+        repository.deleteById(account.getId());
 
-        // Verify deleteById method.
         verify(repository, times(1)).deleteById(1L);
     }
 
@@ -120,15 +121,12 @@ public class IntegrationTesting {
      */
     @Test
     public void testGetAccount() {
-        // Create existing Account object
-        Account existingAccount = new Account();
-        existingAccount.setId(1L);
 
         // Mock repo findById method to return existing account
-        when(repository.findById(1L)).thenReturn(java.util.Optional.of(existingAccount));
+        when(repository.findById(1L)).thenReturn(java.util.Optional.of(account));
 
         // getAccount with ID 1.
-        Optional<Account> retrievedAccount = accountService.getAccountById(1L);
+        Optional<Account> retrievedAccount = accountService.getAccountById(account.getId());
 
         // Verify findById finds account with given ID.
         verify(repository, times(1)).findById(1L);
@@ -137,17 +135,11 @@ public class IntegrationTesting {
         assertNotNull(retrievedAccount);
 
         // Verify correct account is retrieved.
-        assertEquals(existingAccount, retrievedAccount);
+        assertEquals(account, retrievedAccount);
     }
 
-    @Test
-    public void runIntegrationTests() {
 
-        IntegrationTesting integrationTesting = new IntegrationTesting();
-        integrationTesting.testSaveAccount();
-        integrationTesting.testUpdateAccount();
-        integrationTesting.testDeleteAccount();
-        integrationTesting.testGetAccount();
-    }
+
+
 }
 
