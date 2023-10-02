@@ -6,6 +6,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -107,7 +110,7 @@ public class AccountTypeServiceTests {
         when(repository.findById(1L)).thenReturn(java.util.Optional.of(existingAccount));
 
         // Call the getAccount method of the accountService with an account ID
-        Account retrievedAccount = accountService.getAccount(1L);
+        Optional<Account> retrievedAccount = accountService.getAccountById(1L);
 
         // Verify that the repository's findById method was called once with the account ID
         verify(repository, times(1)).findById(1L);

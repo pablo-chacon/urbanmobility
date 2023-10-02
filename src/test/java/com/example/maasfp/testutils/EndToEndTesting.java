@@ -20,18 +20,12 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * This class represents an end-to-end testing framework used to test each endpoint provides the expected response.
+ * AccountController  end-to-end testing endpoint tests.
  */
 public class EndToEndTesting {
-    /**
-     * Runs end-to-end tests to check if each endpoint provides the expected response.
-     */
-    public void runEndToEndTests() {
 
 
-    /**
-     * This class performs AccountController end-to-end tests.
-     */
+
 
     @SpringBootTest
     @AutoConfigureMockMvc
@@ -149,5 +143,7 @@ public class EndToEndTesting {
                     .andExpect(status().isNotFound());
         }
     }
+    public void runEndToEndTests() {
+        System.out.println("Running end-to-end tests...");
     }
 }
