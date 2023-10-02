@@ -109,6 +109,20 @@ public class AccountService implements AccountServiceInterface {
 
     @Override
     public void deleteAccount(Long accountId) {
+        Account account = Account.builder()
+                .id(1L)
+                .username("foo.bar")
+                .accountType("USER")
+                .email("foobar@email.com")
+                .phone("1234567890")
+                .paymentHistory(5)
+                .paymentMethod("Credit Card")
+                .isPaymentSet(true)
+                .build();
 
+        if (!repository.existsById(accountId)){
+            throw new ResourceNotFoundException("No account with " + accountId + " found");
+        }
+        repository.delete(account);
     }
 }

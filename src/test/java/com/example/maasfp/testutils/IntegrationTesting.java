@@ -40,13 +40,16 @@ public class IntegrationTesting {
     @Test
     public void testSaveAccount() {
         // Create a new Account object
-        Account account = new Account();
-        account.setUsername("FooBar");
-        account.setEmail("foo@bar.com");
-        account.setPhone("+460666666");
-        account.setPaymentHistory(Integer.parseInt("Paid"));
-        account.setAccountType("Provider");
-        account.setPaymentMethod("Credit Card");
+        Account account = Account.builder()
+                .id(1L)
+                .username("foo.bar")
+                .accountType("USER")
+                .email("foobar@email.com")
+                .phone("1234567890")
+                .paymentHistory(5)
+                .paymentMethod("Credit Card")
+                .isPaymentSet(true)
+                .build();
 
         //Account newAccount = restTemplate.postForObject("http://localhost:8181/api/accounts", account, Account.class);
         when(repository.save(account)).thenReturn(account);
@@ -96,10 +99,10 @@ public class IntegrationTesting {
      */
     @Test
     public void testDeleteAccount() {
-        // Call the deleteAccount method of the accountService with an account ID
+        // Call the deleteAccount accountService account ID
         accountService.deleteAccount(1L);
 
-        // Verify that the repository's deleteById method was called once with the account ID
+        // Verify deleteById method.
         verify(repository, times(1)).deleteById(1L);
     }
 
