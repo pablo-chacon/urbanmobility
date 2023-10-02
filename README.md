@@ -1,6 +1,10 @@
 # urbanmobility
 MaaS project
+Jenkins CI/CD.
 
-ubuntu server (local machine)
-accounts: guest
-passwd: test666
+Prerequisites:
+Docker,
+Jenkins,
+SSH/Putty,
+Git.
+
