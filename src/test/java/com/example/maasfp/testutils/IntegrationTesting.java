@@ -26,11 +26,23 @@ public class IntegrationTesting {
     private AccountRepository repository;
     @Mock
     private AccountService accountService;
+    @Mock
+    private Account account;
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         accountService = new AccountService(repository);
+        account = Account.builder()
+            .id(1L)
+            .username("foo.bar")
+            .accountType("USER")
+            .email("foobar@email.com")
+            .phone("1234567890")
+            .paymentHistory(5)
+            .paymentMethod("Credit Card")
+            .isPaymentSet(true)
+            .build();
     }
 
     /**
@@ -39,21 +51,8 @@ public class IntegrationTesting {
      */
     @Test
     public void testSaveAccount() {
-        // Create a new Account object
-        Account account = Account.builder()
-                .id(1L)
-                .username("foo.bar")
-                .accountType("USER")
-                .email("foobar@email.com")
-                .phone("1234567890")
-                .paymentHistory(5)
-                .paymentMethod("Credit Card")
-                .isPaymentSet(true)
-                .build();
 
-        //Account newAccount = restTemplate.postForObject("http://localhost:8181/api/accounts", account, Account.class);
         when(repository.save(account)).thenReturn(account);
-
         // Call the saveAccount method of the accountService
         Account savedAccount = accountService.saveAccount(account);
 
@@ -74,23 +73,32 @@ public class IntegrationTesting {
     @Test
     public void testUpdateAccount() {
         // Create an existing Account object
-        Account oldAccount = new Account();
-        oldAccount.setId(1L);
+        Account account1 = Account.builder()
+                .id(1L)
+                .username("sl")
+                .accountType("PROVIDER")
+                .email("provider@sl.se")
+                .phone("9876543210")
+                .paymentHistory(10)
+                .paymentMethod("post-giro")
+                .isPaymentSet(true)
+                .build();
+
 
         // Mock repo save method to returns updated account
-        when(repository.save(oldAccount)).thenReturn(oldAccount);
+        when(repository.save(account1)).thenReturn(account1);
 
         // Call accountService.updateAccount method.
-        Account updatedAccount = accountService.updateAccount(oldAccount);
+        Account updatedAccount = accountService.updateAccount(account1);
 
         // Verify repo save method called with updated account
-        verify(repository, times(1)).save(oldAccount);
+        verify(repository, times(1)).save(account1);
 
         // Verify updated account is not null
         assertNotNull(updatedAccount);
 
         // Verify updated account is same old account
-        assertEquals(oldAccount, updatedAccount);
+        assertEquals(account1, updatedAccount);
     }
 
     /**
@@ -99,7 +107,7 @@ public class IntegrationTesting {
      */
     @Test
     public void testDeleteAccount() {
-        // Call the deleteAccount accountService account ID
+        // deleteAccount accountService account ID
         accountService.deleteAccount(1L);
 
         // Verify deleteById method.
@@ -112,7 +120,7 @@ public class IntegrationTesting {
      */
     @Test
     public void testGetAccount() {
-        // Create an existing Account object
+        // Create existing Account object
         Account existingAccount = new Account();
         existingAccount.setId(1L);
 

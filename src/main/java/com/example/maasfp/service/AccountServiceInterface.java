@@ -18,9 +18,5 @@ public interface AccountServiceInterface {
 
     Account updateAccountById(Long accountId, Account account);
 
-    Account saveAccount(Account newAccount);
-
-    Account updateAccount(Account oldAccount);
-
-    void deleteAccount(Long accountId);
+    Account saveAccount(Account account);
 }

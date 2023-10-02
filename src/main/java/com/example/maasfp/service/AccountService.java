@@ -19,6 +19,16 @@ public class AccountService implements AccountServiceInterface {
         this.repository = repository;
     }
 
+    Account account = Account.builder()
+            .id(1L)
+            .username("foo.bar")
+            .accountType("USER")
+            .email("foobar@email.com")
+            .phone("1234567890")
+            .paymentHistory(5)
+            .paymentMethod("Credit Card")
+            .isPaymentSet(true)
+            .build();
     List<Account> accounts = new ArrayList<>();
 
 
@@ -26,18 +36,7 @@ public class AccountService implements AccountServiceInterface {
     @Override
     public Optional<Account> getAccountById(long accountId) {
 
-        Account account = Account.builder()
-                .id(1L)
-                .username("foo.bar")
-                .accountType("USER")
-                .email("foobar@email.com")
-                .phone("1234567890")
-                .paymentHistory(5)
-                .paymentMethod("Credit Card")
-                .isPaymentSet(true)
-                .build();
-
-        if (!repository.existsById(account.getId())){
+        if (!repository.existsById(accountId)){
             throw new ResourceNotFoundException("Account with ID" + " " + accountId + " " + "does not exist");
         }
         return repository.findById(accountId);
@@ -98,31 +97,10 @@ public class AccountService implements AccountServiceInterface {
     }
 
     @Override
-    public Account saveAccount(Account newAccount) {
-        return null;
+    public Account saveAccount(Account account) {
+        return repository.save(account);
     }
 
-    @Override
-    public Account updateAccount(Account oldAccount) {
-        return null;
-    }
 
-    @Override
-    public void deleteAccount(Long accountId) {
-        Account account = Account.builder()
-                .id(1L)
-                .username("foo.bar")
-                .accountType("USER")
-                .email("foobar@email.com")
-                .phone("1234567890")
-                .paymentHistory(5)
-                .paymentMethod("Credit Card")
-                .isPaymentSet(true)
-                .build();
 
-        if (!repository.existsById(accountId)){
-            throw new ResourceNotFoundException("No account with " + accountId + " found");
-        }
-        repository.delete(account);
-    }
 }

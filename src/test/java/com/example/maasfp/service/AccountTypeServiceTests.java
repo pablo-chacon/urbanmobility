@@ -17,8 +17,21 @@ public class AccountTypeServiceTests {
 
     @Mock
     private AccountRepository repository;
-
+    @Mock
     private AccountService accountService;
+    @Mock
+    Account account = Account.builder()
+            .id(1L)
+            .username("foo.bar")
+            .accountType("USER")
+            .email("foobar@email.com")
+            .phone("1234567890")
+            .paymentHistory(5)
+            .paymentMethod("Credit Card")
+            .isPaymentSet(true)
+            .build();
+
+
 
     @BeforeEach
     public void setUp() {
@@ -33,15 +46,8 @@ public class AccountTypeServiceTests {
     @Test
     public void testSaveAccount() {
         // Create a new Account object
-        Account account = new Account();
-        account.setUsername("FooBar");
-        account.setEmail("foo@bar.com");
-        account.setPhone("+460666666");
-        account.setPaymentHistory(Integer.parseInt("Paid"));
-        account.setAccountType("Provider");
-        account.setPaymentMethod("Credit Card");
 
-        //Account newAccount = restTemplate.postForObject("http://localhost:8181/api/accounts", account, Account.class);
+        //Account newAccount = restTemplate.postForObject("http://localhost:8080/api/accounts", account, Account.class);
         when(repository.save(account)).thenReturn(account);
 
         // Call the saveAccount method of the accountService
@@ -64,23 +70,23 @@ public class AccountTypeServiceTests {
     @Test
     public void testUpdateAccount() {
         // Create an existing Account object
-        Account oldAccount = new Account();
-        oldAccount.setId(1L);
+        Account account1 = account;
+        account1.setId(1L);
 
         // Mock repo save method to returns updated account
-        when(repository.save(oldAccount)).thenReturn(oldAccount);
+        when(repository.save(account1)).thenReturn(account1);
 
         // Call accountService.updateAccount method.
-        Account updatedAccount = accountService.updateAccount(oldAccount);
+        Account updatedAccount = accountService.updateAccountById(account1.getId(), account1);
 
         // Verify repo save method called with updated account
-        verify(repository, times(1)).save(oldAccount);
+        verify(repository, times(1)).save(account1);
 
         // Verify updated account is not null
         assertNotNull(updatedAccount);
 
         // Verify updated account is same old account
-        assertEquals(oldAccount, updatedAccount);
+        assertEquals(account1, updatedAccount);
     }
 
     /**
@@ -90,7 +96,7 @@ public class AccountTypeServiceTests {
     @Test
     public void testDeleteAccount() {
         // Call the deleteAccount method of the accountService with an account ID
-        accountService.deleteAccount(1L);
+        accountService.deleteAccountById(1L);
 
         // Verify that the repository's deleteById method was called once with the account ID
         verify(repository, times(1)).deleteById(1L);
