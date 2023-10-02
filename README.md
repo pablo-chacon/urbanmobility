@@ -8,3 +8,4 @@ Jenkins,
 SSH/Putty,
 Git.
 
+Docs in the wiki page.
