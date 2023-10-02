@@ -7,6 +7,7 @@ public class SmokeTesting {
     /**
      * Runs smoke tests to check the communication between classes.
      */
+
     public void runSmokeTests() {
         SmokeTesting smokeTesting = new SmokeTesting();
         smokeTesting.runSmokeTests();
