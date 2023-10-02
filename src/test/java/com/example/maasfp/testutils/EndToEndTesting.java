@@ -20,10 +20,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
- * AccountController  end-to-end testing endpoint tests.
+ * AccountController end-to-end endpoint tests.
  */
 public class EndToEndTesting {
-
 
 
 

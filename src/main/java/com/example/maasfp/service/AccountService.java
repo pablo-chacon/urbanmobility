@@ -6,6 +6,7 @@ import com.example.maasfp.repository.AccountRepository;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,11 +19,25 @@ public class AccountService implements AccountServiceInterface {
         this.repository = repository;
     }
 
+    List<Account> accounts = new ArrayList<>();
+
 
 
     @Override
     public Optional<Account> getAccountById(long accountId) {
-        if (!repository.existsById(accountId)){
+
+        Account account = Account.builder()
+                .id(1L)
+                .username("foo.bar")
+                .accountType("USER")
+                .email("foobar@email.com")
+                .phone("1234567890")
+                .paymentHistory(5)
+                .paymentMethod("Credit Card")
+                .isPaymentSet(true)
+                .build();
+
+        if (!repository.existsById(account.getId())){
             throw new ResourceNotFoundException("Account with ID" + " " + accountId + " " + "does not exist");
         }
         return repository.findById(accountId);

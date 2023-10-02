@@ -129,6 +129,7 @@ public class IntegrationTesting {
         assertEquals(existingAccount, retrievedAccount);
     }
 
+    @Test
     public void runIntegrationTests() {
 
         IntegrationTesting integrationTesting = new IntegrationTesting();
