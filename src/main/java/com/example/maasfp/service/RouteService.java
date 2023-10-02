@@ -1,6 +1,5 @@
 package com.example.maasfp.service;
 
-import com.example.maasfp.model.Booking;
 import com.example.maasfp.model.Route;
 import com.example.maasfp.repository.RouteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import java.util.List;
 
 
 @Service
-public class BookingService implements InterfaceBookingService {
+public class RouteService implements InterfaceRouteService {
     @Autowired
     RouteRepository repository;
 
@@ -20,7 +19,7 @@ public class BookingService implements InterfaceBookingService {
     }
 
     @Override
-    public List<Booking> getAllRoutes() {
+    public List<Route> getAllRoutes() {
         return null;
     }
 

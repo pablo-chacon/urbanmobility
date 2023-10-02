@@ -38,8 +38,7 @@ public class AccountTypeServiceTests {
         account.setAccountType("Provider");
         account.setPaymentMethod("Credit Card");
 
-        //Account newAccount = restTemplate.postForObject("http://localhost:8080/api/accounts", account, Account.class);
-        // Mock the repository's saved method to return the new account
+        //Account newAccount = restTemplate.postForObject("http://localhost:8181/api/accounts", account, Account.class);
         when(repository.save(account)).thenReturn(account);
 
         // Call the saveAccount method of the accountService

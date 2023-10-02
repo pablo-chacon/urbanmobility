@@ -47,6 +47,9 @@ public class AccountTypeUnitTests {
                 .accountType("PROVIDER")
                 .email("torsten@flink.com")
                 .phone("1234567890")
+                .paymentHistory(7)
+                .paymentMethod("Swish")
+                .isPaymentSet(true)
                 .build());
 
         Mockito.verify(mockData).add(Account.builder()
@@ -218,7 +221,7 @@ public class AccountTypeUnitTests {
      * @throws Exception Validation error.
      */
     @Test
-    public void testAccountsEquality() throws Exception {
+    public void testAccountsEqualValue() throws Exception {
         // Create two equal value Accounts.
         Account account1 = Account.builder()
                 .id(1L)

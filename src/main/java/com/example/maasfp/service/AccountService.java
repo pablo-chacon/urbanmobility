@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AccountService implements InterfaceUserService {
+public class AccountService implements AccountServiceInterface {
     private final AccountRepository repository;
 
 
@@ -20,6 +20,7 @@ public class AccountService implements InterfaceUserService {
 
 
 
+    @Override
     public Optional<Account> getAccountById(long accountId) {
         if (!repository.existsById(accountId)){
             throw new ResourceNotFoundException("Account with ID" + " " + accountId + " " + "does not exist");
@@ -27,6 +28,7 @@ public class AccountService implements InterfaceUserService {
         return repository.findById(accountId);
     }
 
+    @Override
     public List<Account> getAllAccounts() {
         if(repository.findAll().isEmpty()){
             throw new ResourceNotFoundException("No account found");
@@ -34,6 +36,7 @@ public class AccountService implements InterfaceUserService {
         return repository.findAll();
     }
 
+    @Override
     public Account findByAccountType(String accountType) {
         if(repository.findByAccountType(accountType) == null){
             throw new ResourceNotFoundException("No account found");
@@ -41,11 +44,16 @@ public class AccountService implements InterfaceUserService {
         return repository.findByAccountType(accountType);
     }
 
+    @Override
     public Account createAccount(Account account) {
         // Check if username already exist
         String username = account.getUsername();
         if (repository.findByUsername(username) != null) {
             throw new InvalidInputException(username + "is already in use");
+        } else if (username == null) {
+            throw new InvalidInputException("Username cannot be null");
+        } else if (username.length() < 3) {
+            throw new InvalidInputException("Username must be at least 3 characters long");
         }
 
         // Check if email already exist
@@ -57,6 +65,7 @@ public class AccountService implements InterfaceUserService {
         return repository.save(account);
     }
 
+    @Override
     public void deleteAccountById(long accountId) {
         if(!repository.existsById(accountId)){
             throw new ResourceNotFoundException("No account with " + accountId + " found");
@@ -64,6 +73,7 @@ public class AccountService implements InterfaceUserService {
         repository.deleteById(accountId);
     }
 
+    @Override
     public Account updateAccountById(Long accountId, Account account) {
         if (!repository.existsById(accountId)){
             throw new ResourceNotFoundException("No account with " + accountId + " found");
@@ -85,20 +95,5 @@ public class AccountService implements InterfaceUserService {
     @Override
     public void deleteAccount(Long accountId) {
 
-    }
-
-    @Override
-    public Account getAccount(Long accountId) {
-        return null;
-    }
-
-    @Override
-    public void deleteAccountById(Long accountId) {
-
-    }
-
-    @Override
-    public Account getAccountById(Long accountId) {
-        return null;
     }
 }
