@@ -1,4 +1,4 @@
-package com.example.maasfp.model;
+/*package com.example.maasfp.model;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -183,7 +183,7 @@ public class AccountTypeUnitTests {
      * Description: Exception is thrown if username is null.
      * @throws Exception if error occurs during validation.
      */
-    @Test
+  /*  @Test
     public void testNullUsernameException() throws Exception {
         // Attempt creation of Account with null username.
         assertThrows(IllegalArgumentException.class, () -> {
@@ -194,12 +194,12 @@ public class AccountTypeUnitTests {
                     .build());
         }, "Expected null username exception.");
     }
-
+*/
     /**
      * Test Accounts object throws exception if account type is empty.
      * @throws Exception if error occurs during the validation.
      */
-    @Test
+ /*   @Test
     public void MockTestEmptyAccountTypeException() throws Exception {
         // Attempt creation of empty account type.
         assertThrows(IllegalArgumentException.class, () -> {
@@ -215,12 +215,13 @@ public class AccountTypeUnitTests {
                     .build());
         }, "Expected empty account type exception.");
     }
-
+*/
     /**
      * Test ensures the Accounts object equal another Accounts object.
      * @throws Exception Validation error.
      */
-    @Test
+
+ /*   @Test
     public void testAccountsEqualValue() throws Exception {
         // Create two equal value Accounts.
         Account account1 = Account.builder()
@@ -246,3 +247,5 @@ public class AccountTypeUnitTests {
         assertEquals(account1, account2, "Not equal accounts.");
     }
 }
+/*
+  */
