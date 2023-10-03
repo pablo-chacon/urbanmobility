@@ -108,7 +108,7 @@ public class IntegrationTesting {
      * Description: Ensures successful account removal.
      */
     @Test
-    public void testDeleteAccount(Account account) {
+    public void testDeleteAccount() {
         // deleteAccount accountService account ID
         repository.deleteById(account.getId());
 

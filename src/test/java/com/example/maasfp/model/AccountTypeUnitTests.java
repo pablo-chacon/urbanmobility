@@ -42,7 +42,7 @@ public class AccountTypeUnitTests {
 
 
         mockData.add(Account.builder()
-                .id(1L)
+                .id(2L)
                 .username("torsten.flink")
                 .accountType("PROVIDER")
                 .email("torsten@flink.com")
@@ -53,7 +53,7 @@ public class AccountTypeUnitTests {
                 .build());
 
         Mockito.verify(mockData).add(Account.builder()
-                .id(1L)
+                .id(2L)
                 .username("torsten.flink")
                 .accountType("PROVIDER")
                 .email("torsten@flink.com")
@@ -67,7 +67,7 @@ public class AccountTypeUnitTests {
 
 
         mockData.add(Account.builder()
-                .id(2L)
+                .id(3L)
                 .username("sl")
                 .accountType("PROVIDER")
                 .email("provider@sl.se")
@@ -91,7 +91,7 @@ public class AccountTypeUnitTests {
 
 
         mockData.add(Account.builder()
-                .id(3L)
+                .id(4L)
                 .username("sj")
                 .accountType("PROVIDER")
                 .email("support@sj.se")

@@ -29,7 +29,7 @@ class AccountServiceTest {
                 .build());
 
         mockData.add(Account.builder()
-                .id(1L)
+                .id(2L)
                 .username("torsten.flink")
                 .accountType("PROVIDER")
                 .email("torsten@flink.com")
@@ -51,7 +51,7 @@ class AccountServiceTest {
                 .build());
 
         mockData.add(Account.builder()
-                .id(1L)
+                .id(4L)
                 .username(null)
                 .accountType("ADMIN")
                 .email("admin@urbanmobility.com")
@@ -66,7 +66,9 @@ class AccountServiceTest {
 
     @Test
     void getAccountById() {
-        mockData.get(2);
+
+        System.out.println(mockData.get(1));
+
     }
 
     @Test
@@ -85,8 +87,8 @@ class AccountServiceTest {
     @Test
     void createAccount() {
         mockData.add(Account.builder()
-                .id(1L)
-                .username(null)
+                .id(4L)
+                .username("admin")
                 .accountType("ADMIN")
                 .email("admin@urbanmobility.com")
                 .phone("124522890")

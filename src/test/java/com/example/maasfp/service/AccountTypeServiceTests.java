@@ -69,15 +69,26 @@ public class AccountTypeServiceTests {
      */
     @Test
     public void testUpdateAccount() {
-        // Create an existing Account object
-        Account account1 = account;
-        account1.setId(1L);
+        // New account with updated values.
+        long accountId = account.getId();
+
+        Account account1 = Account.builder()
+                .id(accountId)
+                .username("torsten.flink")
+                .accountType("PROVIDER")
+                .email("torsten@flink.com")
+                .phone("1234567890")
+                .paymentHistory(7)
+                .paymentMethod("Swish")
+                .isPaymentSet(true)
+                .build();
+
 
         // Mock repo save method to returns updated account
         when(repository.save(account1)).thenReturn(account1);
 
         // Call accountService.updateAccount method.
-        Account updatedAccount = accountService.updateAccountById(account1.getId(), account1);
+        Account updatedAccount = accountService.updateAccountById(account.getId(), account1);
 
         // Verify repo save method called with updated account
         verify(repository, times(1)).save(account1);
