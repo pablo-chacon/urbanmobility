@@ -33,16 +33,7 @@ public class IntegrationTesting {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         accountService = new AccountService(repository);
-        account = Account.builder()
-            .id(1L)
-            .username("foo.bar")
-            .accountType("USER")
-            .email("foobar@email.com")
-            .phone("1234567890")
-            .paymentHistory(5)
-            .paymentMethod("Credit Card")
-            .isPaymentSet(true)
-            .build();
+
     }
 
     /**
@@ -53,7 +44,16 @@ public class IntegrationTesting {
     @Test
     public void testSaveAccount() {
         // Create a new Account object
-
+        account = Account.builder()
+                .id(1L)
+                .username("foo.bar")
+                .accountType("USER")
+                .email("foobar@email.com")
+                .phone("1234567890")
+                .paymentHistory(5)
+                .paymentMethod("Credit Card")
+                .isPaymentSet(true)
+                .build();
         //Account newAccount = restTemplate.postForObject("http://localhost:8080/api/accounts", account, Account.class);
         when(repository.save(account)).thenReturn(account);
 
@@ -110,6 +110,16 @@ public class IntegrationTesting {
     @Test
     public void testDeleteAccount() {
         // deleteAccount accountService account ID
+        account = Account.builder()
+                .id(1L)
+                .username("foo.bar")
+                .accountType("USER")
+                .email("foobar@email.com")
+                .phone("1234567890")
+                .paymentHistory(5)
+                .paymentMethod("Credit Card")
+                .isPaymentSet(true)
+                .build();
         repository.deleteById(account.getId());
 
         verify(repository, times(1)).deleteById(1L);
@@ -122,6 +132,16 @@ public class IntegrationTesting {
     @Test
     public void testGetAccount() {
 
+        account = Account.builder()
+                .id(1L)
+                .username("foo.bar")
+                .accountType("USER")
+                .email("foobar@email.com")
+                .phone("1234567890")
+                .paymentHistory(5)
+                .paymentMethod("Credit Card")
+                .isPaymentSet(true)
+                .build();
         // Mock repo findById method to return existing account
         when(repository.findById(1L)).thenReturn(java.util.Optional.of(account));
 

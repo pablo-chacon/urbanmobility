@@ -9,6 +9,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -37,7 +38,9 @@ public class EndToEndTesting {
         @Autowired
         private AccountRepository accountRepository;
 
+        @Mock
         private Account account;
+
         private String jsonAccount;
 
         @BeforeEach
@@ -142,6 +145,7 @@ public class EndToEndTesting {
                     .andExpect(status().isNotFound());
         }
     }
+    @Test
     public void runEndToEndTests() {
         System.out.println("Running end-to-end tests...");
     }
