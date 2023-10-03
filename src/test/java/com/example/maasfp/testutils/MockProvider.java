@@ -20,18 +20,14 @@ public class MockProvider {
     }
 
     /**
+     * @param paymentDetails The payment details.
      * @return Returns payment response.
      */
     @Test
-    public void respondToPayment() {
+    public String respondToPayment(String paymentDetails) {
         String request = "Payment details";
         String response = createResponse(request);
-
-        if (response.equals("Payment successful " + request)) {
-            System.out.println("Payment successful");
-        } else {
-            System.out.println("Payment failed");
-        }
+        return "Payment response " + response;
     }
 }
 
